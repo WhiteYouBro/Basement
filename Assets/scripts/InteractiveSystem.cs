@@ -10,7 +10,9 @@ public class InteractiveSystem : MonoBehaviour
     [SerializeField] private List<KeyCode> interactiveKeys;
     public List<KeyCode> InteractiveKeys { get { return interactiveKeys; } }
 
-    public List<string> Items;
+    public bool IsOrangeKey;
+
+    public bool IsActivatedLever;
 
     private void Update()
     {

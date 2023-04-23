@@ -5,6 +5,8 @@ public class PickableObject : MonoBehaviour
 {
     [SerializeField] private Image HandImage;
 
+    private bool OnTrigger;
+
     private InteractiveSystem InteractiveSystem;
     private void Awake()
     {
@@ -12,21 +14,23 @@ public class PickableObject : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        OnTrigger = true;
         HandImage.enabled = true;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (Input.GetKeyDown(InteractiveSystem.InteractiveKeys[1]))
+        if (Input.GetKeyDown(InteractiveSystem.InteractiveKeys[1]) && OnTrigger)
         {
             Destroy(gameObject);
-            InteractiveSystem.Items.Add(gameObject.name);   
+            InteractiveSystem.IsOrangeKey = true;   
             HandImage.enabled = false;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        OnTrigger = false;
         HandImage.enabled = false;
     }
 

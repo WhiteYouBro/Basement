@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System;
-using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(NavMesh))]
 
@@ -11,12 +10,11 @@ public class EnemyMover : MonoBehaviour
 
     [SerializeField] private float radius = 15f;
 
-    [SerializeField] private Transform[] PatrolPosition;
-
+    [SerializeField] private List<Transform> PatrolPosition;
 
     private NavMeshAgent agent;
     private float targetdistance;
-
+    private int a;
     private bool IsOnRadius;
 
     private void Awake()
@@ -26,7 +24,7 @@ public class EnemyMover : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Patrol());
+        
     }
 
     private void Update()
@@ -35,10 +33,14 @@ public class EnemyMover : MonoBehaviour
         if (targetdistance < radius)
         {
             IsOnRadius = true;
-            agent.SetDestination(target.position);
+            //agent.SetDestination(target.position);
         }
         else
             IsOnRadius = false;
+        float dist = Vector3.Distance(agent.transform.position, agent.pathEndPosition);
+        if (dist < 0.500001f)
+            PatrolUpdate();
+        agent.SetDestination(PatrolPosition[a].position);
     }
 
 #if UNITY_EDITOR
@@ -47,16 +49,10 @@ public class EnemyMover : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+
 #endif
-    IEnumerator Patrol()
+    private void PatrolUpdate()
     {
-        foreach (Transform t in PatrolPosition)
-        {
-            while (!IsOnRadius)
-            {
-                agent.SetDestination(t.position);
-                yield return t;
-            }
-        }        
+        a = Random.Range(0, PatrolPosition.Count);
     }
 }
