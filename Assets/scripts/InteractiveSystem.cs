@@ -6,9 +6,11 @@ public class InteractiveSystem : MonoBehaviour
 {
     [SerializeField] private Light Flashlight;
 
-    [Tooltip("0 to Flashlight Key, 1 to Note Key")]
+    [Tooltip("0 to Flashlight Key, 1 to Interact Key")]
     [SerializeField] private List<KeyCode> interactiveKeys;
     public List<KeyCode> InteractiveKeys { get { return interactiveKeys; } }
+
+    public List<string> Items;
 
     private void Update()
     {
