@@ -16,9 +16,12 @@ public class Lever : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("on trigger");
-        OnTrigger = true;
-        HandImage.enabled = true;
+        if (other.tag == "player")
+        {
+            print(gameObject.name);
+            OnTrigger = true;
+            HandImage.enabled = true;
+        }
     }
 
     private void Update()
@@ -41,6 +44,7 @@ public class Lever : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        print(gameObject.name);
         OnTrigger = false;
         HandImage.enabled = false;
     }

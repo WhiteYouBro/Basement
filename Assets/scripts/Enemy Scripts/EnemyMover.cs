@@ -38,7 +38,7 @@ public class EnemyMover : MonoBehaviour
         else
             IsOnRadius = false;
         float dist = Vector3.Distance(agent.transform.position, agent.pathEndPosition);
-        if (dist < 0.500001f)
+        if (dist < 2f)
             PatrolUpdate();
         agent.SetDestination(PatrolPosition[a].position);
     }
