@@ -15,7 +15,7 @@ public class PickableObject : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         OnTrigger = true;
-        HandImage.enabled = true;
+        HandImage.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class PickableObject : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         OnTrigger = false;
-        HandImage.enabled = false;
+        HandImage.gameObject.SetActive(false);
     }
 
 }
