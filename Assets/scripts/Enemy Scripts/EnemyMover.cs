@@ -33,14 +33,15 @@ public class EnemyMover : MonoBehaviour
         if (targetdistance < radius)
         {
             IsOnRadius = true;
-            //agent.SetDestination(target.position);
+            agent.SetDestination(target.position);
         }
         else
             IsOnRadius = false;
         float dist = Vector3.Distance(agent.transform.position, agent.pathEndPosition);
         if (dist < 2f)
             PatrolUpdate();
-        agent.SetDestination(PatrolPosition[a].position);
+        if(!IsOnRadius)
+            agent.SetDestination(PatrolPosition[a].position);
     }
 
 #if UNITY_EDITOR

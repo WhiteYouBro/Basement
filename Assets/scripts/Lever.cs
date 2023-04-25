@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +18,7 @@ public class Lever : MonoBehaviour
         {
             print(gameObject.name);
             OnTrigger = true;
-            HandImage.enabled = true;
+            HandImage.gameObject.SetActive(true);
         }
     }
 
@@ -37,16 +35,13 @@ public class Lever : MonoBehaviour
             }
             HandImage.enabled = true;
         }
-
-        else
-            HandImage.enabled = false;
     }
 
     private void OnTriggerExit(Collider other)
     {
         print(gameObject.name);
         OnTrigger = false;
-        HandImage.enabled = false;
+        HandImage.gameObject.SetActive(false);
     }
 
 }
