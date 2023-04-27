@@ -8,6 +8,16 @@ public class PickableObject : MonoBehaviour
     private bool OnTrigger;
 
     private InteractiveSystem InteractiveSystem;
+
+    [SerializeField] private bool IsRedKey;
+    [SerializeField] private bool IsYellowKey;
+    [SerializeField] private bool IsBlueKey;
+    [SerializeField] private bool IsOrangeKey;
+
+    private bool whatiskey;
+
+
+
     private void Awake()
     {
         InteractiveSystem = FindObjectOfType<InteractiveSystem>();
@@ -23,8 +33,15 @@ public class PickableObject : MonoBehaviour
         if (Input.GetKeyDown(InteractiveSystem.InteractiveKeys[1]) && OnTrigger)
         {
             Destroy(gameObject);
-            InteractiveSystem.IsOrangeKey = true;   
             HandImage.enabled = false;
+            if (IsYellowKey)
+                InteractiveSystem.IsYellowKey = true;
+            else if (IsBlueKey)
+                InteractiveSystem.IsBlueKey = true;
+            else if (IsRedKey)
+                InteractiveSystem.IsRedKey = true;
+            else if (IsOrangeKey)
+                InteractiveSystem.IsOrangeKey = true;
         }
     }
 

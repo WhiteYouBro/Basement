@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,26 +12,48 @@ public class InteractiveSystem : MonoBehaviour
 
     [SerializeField] private AudioClip SoundFlashlight;
 
-    private AudioSource source;
+    [SerializeField] private GameObject PanelOfDeathScreen;
 
-    public List<KeyCode> InteractiveKeys { get { return interactiveKeys; } }
+    [HideInInspector] public bool IsDead;
 
+    public bool IsRedKey;
+    public bool IsYellowKey;
+    public bool IsBlueKey;
     public bool IsOrangeKey;
 
-    public bool IsActivatedLever;
+    private AudioSource source;
+
+    private StarterAssetsInputs scriptcursor;
+    public List<KeyCode> InteractiveKeys { get { return interactiveKeys; } }
+
+
 
     private void Awake()
     {
         source = GetComponent<AudioSource>();    
+        scriptcursor = GetComponent<StarterAssetsInputs>();
     }
 
     private void Update()
     {
 
-        if (Input.GetKeyDown(InteractiveKeys[0]))
+        if (!IsDead)
         {
-            source.PlayOneShot(SoundFlashlight);
-            Flashlight.enabled = !Flashlight.enabled;
+            if (Input.GetKeyDown(InteractiveKeys[0]))
+            {
+                source.PlayOneShot(SoundFlashlight);
+                Flashlight.enabled = !Flashlight.enabled;
+            }
         }
+    }
+
+    public void Death()
+    {
+        scriptcursor.cursorLocked = false;
+        scriptcursor.cursorInputForLook = false;
+        PanelOfDeathScreen.SetActive(true);
+        Time.timeScale = 0f;
+        IsDead = true;
+        // need to do death cutscene or smth
     }
 }

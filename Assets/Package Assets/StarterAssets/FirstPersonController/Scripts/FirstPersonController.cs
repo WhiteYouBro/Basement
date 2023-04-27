@@ -64,6 +64,7 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
+		private InteractiveSystem interactiveSystem;
 	
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
@@ -88,6 +89,7 @@ namespace StarterAssets
 
 		private void Awake()
 		{
+			interactiveSystem = GetComponent<InteractiveSystem>();
 			// get a reference to our main camera
 			if (_mainCamera == null)
 			{
@@ -112,9 +114,12 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
+			if (!interactiveSystem.IsDead)
+			{
+				JumpAndGravity();
+				GroundedCheck();
+				Move();
+			}
 		}
 
 		private void LateUpdate()

@@ -14,7 +14,7 @@ public class Lever : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "player")
+        if (other.tag == "Player")
         {
             print(gameObject.name);
             OnTrigger = true;
@@ -29,7 +29,7 @@ public class Lever : MonoBehaviour
             if (Input.GetKeyDown(interactiveSystem.InteractiveKeys[1]))
             {
                 LeverUp.SetActive(false);
-                interactiveSystem.IsActivatedLever = true;
+                //interactiveSystem.IsActivatedLever = true;
                 //звук сюда
                 LeverDown.SetActive(true);
             }
